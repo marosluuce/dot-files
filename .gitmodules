@@ -34,6 +34,3 @@
 [submodule "vim-files/bundle/hardmode"]
 	path = vim-files/bundle/hardmode
 	url = git@github.com:wikitopian/hardmode.git
-[submodule "vim-files/bundle/powerline"]
-	path = vim-files/bundle/powerline
-	url = git@github.com:Lokaltog/powerline.git
