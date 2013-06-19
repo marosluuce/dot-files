@@ -1,0 +1,39 @@
+[submodule "vim-files/bundle/command-t"]
+	path = vim-files/bundle/command-t
+	url = git@github.com:wincent/Command-T.git
+[submodule "vim-files/bundle/nerdtree"]
+	path = vim-files/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "vim-files/bundle/rainbow_parentheses"]
+	path = vim-files/bundle/rainbow_parentheses
+	url = git@github.com:kien/rainbow_parentheses.vim.git
+[submodule "vim-files/bundle/solarized"]
+	path = vim-files/bundle/solarized
+	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule "vim-files/bundle/nerdcommenter"]
+	path = vim-files/bundle/nerdcommenter
+	url = git@github.com:scrooloose/nerdcommenter.git
+[submodule "vim-files/bundle/delimitemate"]
+	path = vim-files/bundle/delimitemate
+	url = git@github.com:Raimondi/delimitMate.git
+[submodule "vim-files/bundle/endwise"]
+	path = vim-files/bundle/endwise
+	url = git@github.com:tpope/vim-endwise.git
+[submodule "vim-files/bundle/fugitive"]
+	path = vim-files/bundle/fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "vim-files/bundle/repeat"]
+	path = vim-files/bundle/repeat
+	url = git@github.com:tpope/vim-repeat.git
+[submodule "vim-files/bundle/surround"]
+	path = vim-files/bundle/surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "vim-files/bundle/syntastic"]
+	path = vim-files/bundle/syntastic
+	url = git@github.com:scrooloose/syntastic.git
+[submodule "vim-files/bundle/hardmode"]
+	path = vim-files/bundle/hardmode
+	url = git@github.com:wikitopian/hardmode.git
+[submodule "vim-files/bundle/powerline"]
+	path = vim-files/bundle/powerline
+	url = git@github.com:Lokaltog/powerline.git
