@@ -309,6 +309,7 @@ autocmd BufReadPost fugitive://*
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
+set background=dark
 colorscheme solarized
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
