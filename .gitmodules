@@ -34,3 +34,6 @@
 [submodule "vim-files/bundle/hardmode"]
 	path = vim-files/bundle/hardmode
 	url = git@github.com:wikitopian/hardmode.git
+[submodule "vim-files/bundle/vimclojure"]
+	path = vim-files/bundle/vimclojure
+	url = git@github.com:vim-scripts/VimClojure.git
