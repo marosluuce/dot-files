@@ -252,9 +252,7 @@ let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 40
 
 "explorer mappings
-nnoremap <f1> :BufExplorer<cr>
-nnoremap <f2> :NERDTreeToggle<cr>
-nnoremap <f3> :TagbarToggle<cr>
+nnoremap <f1> :NERDTreeToggle<cr>
 
 "source project specific config files
 runtime! projects/**/*.vim
@@ -310,6 +308,26 @@ autocmd BufReadPost fugitive://*
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
+
+nnoremap ; :
+nnoremap j gj
+nnoremap k gk
+noremap tab C-n
+
+inoremap jj <esc>
+cnoremap jj <c-c>
+
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-n>"
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
+set autoread
 
 syntax enable
 set background=light
