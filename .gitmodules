@@ -1,6 +1,3 @@
-[submodule "vim-files/bundle/command-t"]
-	path = vim-files/bundle/command-t
-	url = git@github.com:wincent/Command-T.git
 [submodule "vim-files/bundle/nerdtree"]
 	path = vim-files/bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
@@ -37,3 +34,6 @@
 [submodule "vim-files/bundle/vimclojure"]
 	path = vim-files/bundle/vimclojure
 	url = git@github.com:vim-scripts/VimClojure.git
+[submodule "vim-files/bundle/paredit.vim"]
+	path = vim-files/bundle/paredit.vim
+	url = git@github.com:vim-scripts/paredit.vim.git

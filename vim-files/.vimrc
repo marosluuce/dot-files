@@ -31,7 +31,9 @@ set linebreak   "wrap lines at convenient points
 
 if v:version >= 703
     "undo settings
-    set undodir=~/.vim/undofiles
+    set backupdir=~/.vim/backup//
+    set directory=~/.vim/swap//
+    set undodir=~/.vim/undo//
     set undofile
 
     set colorcolumn=+1 "mark the ideal max text width
@@ -309,7 +311,8 @@ autocmd BufReadPost fugitive://*
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
-set background=dark
+syntax enable
+set background=light
 colorscheme solarized
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
