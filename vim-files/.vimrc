@@ -312,7 +312,11 @@ autocmd BufReadPost fugitive://*
 nnoremap ; :
 nnoremap j gj
 nnoremap k gk
-noremap tab C-n
+
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 inoremap jj <esc>
 cnoremap jj <c-c>
