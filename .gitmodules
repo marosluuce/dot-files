@@ -46,3 +46,6 @@
 [submodule "vim-files/bundle/vim-elixir"]
 	path = vim-files/bundle/vim-elixir
 	url = git@github.com:elixir-lang/vim-elixir.git
+[submodule "vim-files/bundle/vim-mix"]
+	path = vim-files/bundle/vim-mix
+	url = git@github.com:mattreduce/vim-mix.git
