@@ -58,6 +58,12 @@
 
 (require 'neotree)
 (global-set-key [f1] 'neotree-toggle)
+(add-hook 'neotree-mode-hook
+	  (lambda ()
+	    (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+	    (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
+	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -102,6 +108,8 @@
     (setq js-indent-level 2))
 
 (add-hook 'js-mode-hook 'js-custom)
+
+(add-hook 'elixir-mode-hook 'alchemist-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
