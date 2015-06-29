@@ -15,6 +15,7 @@
 		     helm
 		     helm-projectile
 		     js2-mode
+		     key-chord
 		     neotree
 		     paradox
 		     projectile
@@ -24,7 +25,8 @@
 		     solarized-theme
 		     web-mode))
 
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 (package-initialize)
@@ -60,6 +62,9 @@
   "cc" 'evilnc-comment-or-uncomment-lines
   "cy" 'evilnc-copy-and-comment-lines)
 
+(key-chord-mode 1)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 
@@ -81,7 +86,7 @@
 
 (setq tab-width 2
       indent-tabs-mode nil)
-
+(setq js-indent-level 2)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -98,11 +103,23 @@
 (require 'autopair)
 (autopair-global-mode 1)
 
-(add-hook 'js-mode-hook (setq js-indent-level 2))
-
 (add-hook 'elixir-mode-hook 'alchemist-mode)
 
+(require 'rbenv)
+(add-hook 'ruby-mode-hook
+	  (lambda ()
+	    (global-rbenv-mode t)
+	    (rbenv-use-corresponding)))
+
 (require 'rspec-mode)
+(setq rspec-use-opts-file-when-available t)
+(setq rspec-command-options "")
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+
+(ad-activate 'rspec-compile)
 
 (set-default-font "Monaco 12")
 (load-theme 'solarized-light t)
