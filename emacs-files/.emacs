@@ -18,7 +18,10 @@
 		     neotree
 		     paradox
 		     projectile
+		     rbenv
+		     rspec-mode
 		     ruby-mode
+		     solarized-theme
 		     web-mode))
 
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
@@ -38,8 +41,11 @@
 (helm-autoresize-mode 1)
 
 (require 'projectile)
+(require 'helm-projectile)
+(helm-projectile-on)
 
 (global-company-mode 1)
+(setq tab-always-indent 'company-complete)
 
 (global-evil-leader-mode 1)
 (require 'evil)
@@ -50,6 +56,7 @@
   "mx" 'execute-extended-command
   "t"  'helm-projectile
   "f"  'helm-projectile-find-file-dwim
+  "g"  'helm-projectile-grep
   "cc" 'evilnc-comment-or-uncomment-lines
   "cy" 'evilnc-copy-and-comment-lines)
 
@@ -65,6 +72,7 @@
 	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
 	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
+(scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
@@ -74,7 +82,6 @@
 (setq tab-width 2
       indent-tabs-mode nil)
 
-(setq make-backup-files nil)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -83,39 +90,37 @@
       visible-bell t)
 (show-paren-mode t)
 
-(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 
 (setq-default show-trailing-whitespace t)
-
-(add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.eex$" . web-mode))
 
 (require 'autopair)
 (autopair-global-mode 1)
 
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
-
-(defun js-custom ()
-  "js-mode-hook"
-    (setq js-indent-level 2))
-
-(add-hook 'js-mode-hook 'js-custom)
+(add-hook 'js-mode-hook (setq js-indent-level 2))
 
 (add-hook 'elixir-mode-hook 'alchemist-mode)
+
+(require 'rspec-mode)
+
+(set-default-font "Monaco 12")
+(load-theme 'solarized-light t)
+
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
