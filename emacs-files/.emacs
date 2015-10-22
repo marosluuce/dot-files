@@ -5,29 +5,31 @@
 (load "package")
 
 (setq package-list '(alchemist
-		     autopair
-		     company
-		     evil
-		     evil-leader
-		     evil-nerd-commenter
-		     evil-surround
-		     elixir-mode
-		     helm
-		     helm-projectile
-		     js2-mode
-		     key-chord
-		     neotree
-		     paradox
-		     projectile
-		     rbenv
-		     rspec-mode
-		     ruby-mode
-		     solarized-theme
-		     web-mode))
+                     autopair
+                     company
+                     evil
+                     evil-leader
+                     evil-nerd-commenter
+                     evil-surround
+                     elixir-mode
+                     helm
+                     helm-projectile
+                     js2-mode
+                     key-chord
+                     magit
+                     neotree
+                     paradox
+                     projectile
+                     rbenv
+                     rspec-mode
+                     ruby-mode
+                     solarized-theme
+                     web-mode
+                     yaml-mode))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")))
+                         ("melpa" . "http://melpa.milkbox.net/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 (package-initialize)
 
@@ -45,6 +47,7 @@
 (require 'projectile)
 (require 'helm-projectile)
 (helm-projectile-on)
+(setq projectile-use-git-grep t)
 
 (global-company-mode 1)
 (setq tab-always-indent 'company-complete)
@@ -71,28 +74,29 @@
 (require 'neotree)
 (global-set-key [f1] 'neotree-toggle)
 (add-hook 'neotree-mode-hook
-	  (lambda ()
-	    (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-	    (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
-	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+          (lambda ()
+            (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+            (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
+            (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+            (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
 (setq inhibit-splash-screen t
       initial-scratch-message nil)
 
-(setq tab-width 2
-      indent-tabs-mode nil)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
 (setq js-indent-level 2)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(setq echo-keystrokes 0.1
-      use-dialog-box nil
-      visible-bell t)
+(setq echo-keystrokes 0.1 use-dialog-box nil)
 (show-paren-mode t)
 
 (setq auto-save-default nil)
@@ -105,11 +109,12 @@
 
 (add-hook 'elixir-mode-hook 'alchemist-mode)
 
+(setq ruby-insert-encoding-magic-comment nil)
 (require 'rbenv)
 (add-hook 'ruby-mode-hook
-	  (lambda ()
-	    (global-rbenv-mode t)
-	    (rbenv-use-corresponding)))
+          (lambda ()
+            (global-rbenv-mode t)
+            (rbenv-use-corresponding)))
 
 (require 'rspec-mode)
 (setq rspec-use-opts-file-when-available t)
@@ -121,7 +126,11 @@
 
 (ad-activate 'rspec-compile)
 
-(set-default-font "Monaco 12")
+(add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+
+(set-default-font "Hack 12")
 (load-theme 'solarized-light t)
 
 (defun on-after-init ()
