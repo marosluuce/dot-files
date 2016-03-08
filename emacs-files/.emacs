@@ -4,32 +4,38 @@
 
 (load "package")
 
-(setq package-list '(alchemist
-                     autopair
-                     company
-                     evil
-                     evil-leader
-                     evil-nerd-commenter
-                     evil-surround
-                     elixir-mode
-                     helm
-                     helm-projectile
-                     js2-mode
-                     key-chord
-                     magit
-                     neotree
-                     paradox
-                     projectile
-                     rbenv
-                     rspec-mode
-                     ruby-mode
-                     solarized-theme
-                     web-mode
-                     yaml-mode))
+(setq package-list
+      '(alchemist
+        autopair
+        company
+        elm-mode
+        evil
+        evil-leader
+        evil-nerd-commenter
+        evil-surround
+        elixir-mode
+        haskell-mode
+        helm
+        helm-projectile
+        js2-mode
+        key-chord
+        magit
+        misc-cmds
+        neotree
+        paradox
+        projectile
+        rbenv
+        rspec-mode
+        ruby-mode
+        ruby-end
+        solarized-theme
+        web-mode
+        yaml-mode))
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 (package-initialize)
 
@@ -56,14 +62,20 @@
 (require 'evil)
 (evil-mode 1)
 
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer-and-its-windows (delq (current-buffer) (buffer-list))))
+
 (evil-leader/set-leader ",")
 (evil-leader/set-key
-  "mx" 'execute-extended-command
+  "mx" 'helm-M-x
   "t"  'helm-projectile
   "f"  'helm-projectile-find-file-dwim
   "g"  'helm-projectile-grep
   "cc" 'evilnc-comment-or-uncomment-lines
-  "cy" 'evilnc-copy-and-comment-lines)
+  "cy" 'evilnc-copy-and-comment-lines
+  "reset" 'kill-other-buffers)
 
 (key-chord-mode 1)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
@@ -84,7 +96,6 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-(require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 (setq inhibit-splash-screen t
@@ -108,23 +119,20 @@
 (autopair-global-mode 1)
 
 (add-hook 'elixir-mode-hook 'alchemist-mode)
+(add-to-list 'elixir-mode-hook
+   (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+     (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+     (ruby-end-mode +1)))
 
 (setq ruby-insert-encoding-magic-comment nil)
-(require 'rbenv)
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (global-rbenv-mode t)
-            (rbenv-use-corresponding)))
 
-(require 'rspec-mode)
-(setq rspec-use-opts-file-when-available t)
-(setq rspec-command-options "")
-(defadvice rspec-compile (around rspec-compile-around)
-  "Use BASH shell for running the specs because of ZSH issues."
-  (let ((shell-file-name "/bin/bash"))
-    ad-do-it))
-
-(ad-activate 'rspec-compile)
+(add-hook 'ruby-mode 'rspec-mode)
+(add-to-list 'ruby-mode
+             (lambda ()
+               (setq rspec-use-opts-file-when-available t)
+               (setq rspec-command-options "")))
 
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
 
