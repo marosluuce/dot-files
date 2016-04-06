@@ -1,4 +1,5 @@
 (set-keyboard-coding-system nil)
+(setenv "LANG" "en_US.UTF-8")
 
 (setenv "PATH"  (concat "/usr/local/bin:/opt/local/bin:/usr/bin:/bin"  (getenv "PATH")))
 
@@ -129,10 +130,8 @@
 (setq ruby-insert-encoding-magic-comment nil)
 
 (add-hook 'ruby-mode 'rspec-mode)
-(add-to-list 'ruby-mode
-             (lambda ()
-               (setq rspec-use-opts-file-when-available t)
-               (setq rspec-command-options "")))
+(add-to-list 'ruby-mode (setq rspec-use-opts-file-when-available t))
+(add-to-list 'ruby-mode (setq rspec-command-options ""))
 
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
 
