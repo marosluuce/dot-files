@@ -24,6 +24,7 @@
         misc-cmds
         neotree
         paradox
+        powerline
         projectile
         rbenv
         rspec-mode
